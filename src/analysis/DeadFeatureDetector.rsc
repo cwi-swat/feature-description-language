@@ -55,4 +55,4 @@ void loadSmtSetup(SolverPID pid, list[str] smt) {
 FeatureDefinition getRoot(FeatureDiagram dia) = dia.definitions.definitions[0];
 
 FeatureDiagram addConstraint(FeatureDiagram orig, Constraint newConstraint) =
-  diagram(orig.name, orig.includes, orig.definitions, orig.constraints + newConstraint);
+  diagram(orig.name, orig.includes, orig.definitions, orig.constraints + newConstraint)[@location = orig@location];

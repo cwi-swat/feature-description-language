@@ -5,7 +5,7 @@ import List;
 
 list[str] translateToSmt(set[FeatureDiagram] diagrams) {
   // first declare all variables
-  list[str] smtCommands = ["(declare-const <name> Bool)" | str name <- {qn.name | /QualifiedName qn := diagrams}];
+  list[str] smtCommands = ["(declare-const <name> Bool)" | str name <- {qn.name | /QualifiedName qn := diagrams} + {name | /definition(str name, FeatureExpression _) := diagrams}];
   
   for (FeatureDiagram dia <- diagrams) {
     smtCommands += translateDefs(dia);

@@ -34,13 +34,13 @@ data Constraint
 	;
 	
 data DiagramConstraint
-	= requires(str feature1, str feature2) 
-	| excludes(str feature1, str feature2)
+	= requires(QualifiedName feature1, QualifiedName feature2) 
+	| excludes(QualifiedName feature1, QualifiedName feature2)
 	;
 	
 data UserConstraint
-	= include(str feature)
-	| exclude(str feature)
+	= include(QualifiedName feature)
+	| exclude(QualifiedName feature)
 	; 
 
 anno loc FeatureDiagram@location;

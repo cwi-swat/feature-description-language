@@ -15,10 +15,12 @@ import IO;
 import ValueIO;
 import Message;
 
-import ParseTree;
+import ParseTree; 
 import AST;
 import Node;
 import Map;
+
+import analysis::DeadFeatureDetector;
 
 anno rel[loc, loc] Tree@hyperlinks;
 
@@ -60,7 +62,21 @@ public void main() {
 	        	name = prompt("Enter the file name for the visualisation: ");
 	        	
 	        	saveRenderedFeatureDiagram(|project://feature-diagram-language/bin/<name>.png|, diagrams, defs, resolvedRefs);
-	        })
+	        }),
+	        menu("Analysis", [
+	         action("Find Dead Features", void (Tree fd, loc selection) {
+	           DeadFeatureResult result = findDeadFeatures(implodeFDL(fd));
+	           
+	           if (result == noDeadFeaturesFound()) {
+	             alert("No dead features found");
+	           } else {
+	             alert("Dead features detected:
+	                   '<for (QualifiedName qn <- result.deadFeatures) {>
+	                   ' * <qn.name><}>
+	                   '");
+	           }	               
+	         })
+	        ])
 	      ])
 	    )    	
     };
